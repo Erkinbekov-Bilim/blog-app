@@ -1,5 +1,5 @@
 import { Toolbar, Box } from '@mui/material';
-import type INavigate from '../../types/navigate';
+import type INavigate from '../../types/navigate/navigate';
 import NavigateItem from './NavigateItem/NavigateItem';
 
 interface INavBarProps {
@@ -22,8 +22,8 @@ const NavBar: React.FC<INavBarProps> = ({ navigates }) => {
             gap: 15,
           }}
         >
-          {navigates.map((navigate) => (
-            <NavigateItem navigate={navigate} />
+          {navigates.map((navigate, index) => (
+            <NavigateItem navigate={navigate} key={navigate.name + index} />
           ))}
         </Box>
       </Toolbar>

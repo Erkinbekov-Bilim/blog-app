@@ -1,5 +1,5 @@
 import React from 'react';
-import type INavigate from '../../../types/navigate';
+import type INavigate from '../../../types/navigate/navigate';
 import { NavLink } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { motion } from 'framer-motion';
