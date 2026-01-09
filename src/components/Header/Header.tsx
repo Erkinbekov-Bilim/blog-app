@@ -1,6 +1,6 @@
 import { AppBar } from '@mui/material';
 import NavBar from '../../UI/NavBar/NavBar';
-import type INavigate from '../../types/navigate';
+import type INavigate from '../../types/navigate/navigate';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import FeedRoundedIcon from '@mui/icons-material/FeedRounded';
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
@@ -31,7 +31,7 @@ const Header = () => {
   ];
   return (
     <AppBar
-      position="fixed"
+      position="static"
       sx={{
         maxWidth: 'var(--app-width)',
         width: 'var(--app-width)',
