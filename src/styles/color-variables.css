@@ -5,10 +5,16 @@
 
   --color-text: #ffffff;
   --color-bg-text: #5d4037;
+  --color-bg-text-white: #ffffff;
 
   --color-nav-bg: #6d4c41;
   --color-nav-link: #ffffff;
 
   --color-bg-button: #bcaaa4;
   --color-text-button: #3e2723;
+
+  --color-bg-card: #795548;
+  --color-card-border: #3e2723;
+
+  --color-loader: #3e2723;
 }
