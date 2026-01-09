@@ -3,7 +3,7 @@ import Home from './containers/Home/Home';
 import Add from './containers/Add/Add';
 import About from './containers/About/About';
 import Contacts from './containers/Contacts/Contacts';
-import { Box } from '@mui/material';
+import { Box, Card } from '@mui/material';
 import NotFound from './containers/NotFound/NotFound';
 import Layout from './Layout/Layout';
 
@@ -28,6 +28,16 @@ const App = () => {
             </Layout>
           }
         />
+        <Route
+          path="/posts"
+          element={
+            <Layout>
+              <Home />
+            </Layout>
+          }
+        >
+          <Route path=":id" element={<Card />} />
+        </Route>
         <Route
           path="/new-post"
           element={
