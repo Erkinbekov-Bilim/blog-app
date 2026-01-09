@@ -9,7 +9,7 @@ interface INavigateItemProps {
 }
 
 const NavigateItem: React.FC<INavigateItemProps> = ({ navigate }) => {
-  const MotionNavLink = motion(NavLink);
+  const MotionNavLink = motion.create(NavLink);
 
   const animation = {
     initial: {
