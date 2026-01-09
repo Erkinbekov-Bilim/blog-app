@@ -1,20 +1,27 @@
 :root {
-  --color-bg-body: #a1887f;
+  --color-bg-body: #e0e0e0;
 
-  --color-bg-tag-main: #efebe9;
+  --color-bg-tag-main: #fafafa;
 
   --color-text: #ffffff;
-  --color-bg-text: #5d4037;
+  --color-text-600: #757575;
+  --color-bg-text: #616161;
+  --color-border-text: #bdbdbd;
   --color-bg-text-white: #ffffff;
 
-  --color-nav-bg: #6d4c41;
+  --color-nav-bg: #757575;
   --color-nav-link: #ffffff;
 
-  --color-bg-button: #bcaaa4;
-  --color-text-button: #3e2723;
+  --color-bg-button: #757575;
+  --color-text-button: #eeeeee;
+  --color-border-button: #616161;
 
-  --color-bg-card: #795548;
-  --color-card-border: #3e2723;
+  --color-bg-card: #e0e0e0;
+  --color-bg-card-white: #ffffff;
+  --color-card-border: #212121;
 
-  --color-loader: #3e2723;
+  --color-bg-input: #ffffff;
+  --color-border-input: #212121;
+
+  --color-loader: #212121;
 }
