@@ -3,6 +3,7 @@ import type IBlog from '../../types/blog/blog';
 import { Box, Button, Typography } from '@mui/material';
 import { motion } from 'framer-motion';
 import { NavLink, useLocation } from 'react-router-dom';
+import dayjs from 'dayjs';
 
 interface ICardProps {
   post: IBlog;
@@ -10,7 +11,6 @@ interface ICardProps {
 
 const Card: React.FC<ICardProps> = ({ post }) => {
   const location = useLocation();
-  console.log(location);
 
   const MotionNavLink = motion.create(NavLink);
 
@@ -26,6 +26,8 @@ const Card: React.FC<ICardProps> = ({ post }) => {
     },
   };
 
+  const formattedDate: string = dayjs(post.date).format('DD.MM.YYYY HH:mm:ss');
+
   return (
     <>
       <Box
@@ -36,7 +38,7 @@ const Card: React.FC<ICardProps> = ({ post }) => {
           paddingX: 4,
           paddingY: 3,
           gap: 3,
-          border: '5px solid var(--color-card-border)',
+          border: '1px solid var(--color-card-border)',
         }}
       >
         <Box
@@ -54,7 +56,7 @@ const Card: React.FC<ICardProps> = ({ post }) => {
               padding: 2,
             }}
           >
-            Created At - {post.date}
+            Created At - {formattedDate}
           </Typography>
         </Box>
         <Typography

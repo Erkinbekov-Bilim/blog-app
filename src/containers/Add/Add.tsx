@@ -1,9 +1,9 @@
-import React from 'react';
+import BlogForm from '../../components/BlogForm/BlogForm';
 
 const Add = () => {
   return (
     <div>
-      
+      <BlogForm/>
     </div>
   );
 };
