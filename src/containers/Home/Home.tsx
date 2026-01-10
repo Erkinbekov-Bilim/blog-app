@@ -7,8 +7,10 @@ import Card from '../../components/Card/Card';
 import Loading from '../../UI/Loading/Loading';
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
 import './Home.css';
+import { useLocation } from 'react-router-dom';
 
 const Home = () => {
+  const location = useLocation();
   const [loading, setLoading] = useState<boolean>(false);
   const [blog, setBlog] = useState<IBlog[]>([]);
 
@@ -39,7 +41,7 @@ const Home = () => {
 
   useEffect(() => {
     void getBlog();
-  }, [getBlog]);
+  }, [getBlog, location.pathname]);
 
   let page: React.ReactNode =
     blog.length === 0 ? (

@@ -13,15 +13,19 @@ import axiosApi from '../../api/axiosApi';
 import { useNavigate } from 'react-router-dom';
 
 interface IBlogFormProps {
-  id?: boolean;
+  id?: string;
+  initialValueForm?: IBlogMutation;
 }
 
-const BlogForm: React.FC<IBlogFormProps> = ({ id }) => {
-  const [loading, setLoading] = useState<boolean>(false);
-  const [form, setForm] = useState<IBlogMutation>({
+const BlogForm: React.FC<IBlogFormProps> = ({
+  id,
+  initialValueForm = {
     title: '',
     description: '',
-  });
+  },
+}) => {
+  const [loading, setLoading] = useState<boolean>(false);
+  const [form, setForm] = useState<IBlogMutation>(initialValueForm);
   const [error, setError] = useState<IBlogMutation>({
     title: '',
     description: '',
@@ -39,7 +43,7 @@ const BlogForm: React.FC<IBlogFormProps> = ({ id }) => {
   };
 
   let styleBox: CSSObject = {
-    width: '700px',
+    width: '100%',
     backgroundColor: 'inherit',
     border: '1px solid var(--color-card-border)',
     padding: '1.5rem',
@@ -61,6 +65,7 @@ const BlogForm: React.FC<IBlogFormProps> = ({ id }) => {
   if (!id) {
     styleBox = {
       ...styleBox,
+      width: '700px',
       position: 'fixed',
       top: '50%',
       left: '50%',
@@ -95,6 +100,7 @@ const BlogForm: React.FC<IBlogFormProps> = ({ id }) => {
     try {
       setLoading(true);
       if (id) {
+        await axiosApi.put(`/blog/${id}.json`, form);
       } else {
         if (form.title.trim().length === 0) {
           return validateForm('title');
@@ -103,37 +109,41 @@ const BlogForm: React.FC<IBlogFormProps> = ({ id }) => {
         if (form.description.trim().length === 0) {
           return validateForm('description');
         }
-        axiosApi.post('/blog.json', form);
+        await axiosApi.post('/blog.json', form);
       }
-
-      setForm({
-        title: '',
-        description: '',
-      });
-
-      navigate('/');
     } catch (error) {
       console.error(error);
     } finally {
       setLoading(false);
     }
+
+    setForm({
+      title: '',
+      description: '',
+    });
+
+    navigate('/');
   };
 
   return (
     <>
-      <Typography
-        textAlign={'center'}
-        sx={{
-          fontSize: '1rem',
-          letterSpacing: 'var(--letter-spacing-sm)',
-          border: '1px solid var(--color-border-text)',
-          color: 'var(--color-text-600)',
-          paddingY: '10px',
-          textTransform: 'uppercase',
-        }}
-      >
-        {!id && 'add blog!'}
-      </Typography>
+      {!id && (
+        <>
+          <Typography
+            textAlign={'center'}
+            sx={{
+              fontSize: '1rem',
+              letterSpacing: 'var(--letter-spacing-sm)',
+              border: '1px solid var(--color-border-text)',
+              color: 'var(--color-text-600)',
+              paddingY: '10px',
+              textTransform: 'uppercase',
+            }}
+          >
+            {!id && 'add blog!'}
+          </Typography>
+        </>
+      )}
       <Box sx={{ ...styleBox }}>
         <Typography
           sx={{
@@ -173,6 +183,7 @@ const BlogForm: React.FC<IBlogFormProps> = ({ id }) => {
                 helperText={error[input as keyof IBlogMutation]}
               />
             ))}
+
             <MotionButton
               fullWidth
               loading={loading}

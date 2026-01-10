@@ -1,9 +1,10 @@
 import React from 'react';
 import type IBlog from '../../types/blog/blog';
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button, Typography, IconButton } from '@mui/material';
 import { motion } from 'framer-motion';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import dayjs from 'dayjs';
+import DrawRoundedIcon from '@mui/icons-material/DrawRounded';
 
 interface ICardProps {
   post: IBlog;
@@ -26,6 +27,33 @@ const Card: React.FC<ICardProps> = ({ post }) => {
     },
   };
 
+  const closeButton: React.ReactNode = (
+    <>
+      <Typography
+        component={'p'}
+        sx={{
+          letterSpacing: 'var(--letter-spacing-sm)',
+          backgroundColor: 'var(--color-bg-text-white)',
+          padding: 2,
+        }}
+      >
+        {post.description}
+      </Typography>
+      <Button
+        component={MotionNavLink}
+        sx={{
+          borderRadius: 0,
+          fontSize: '0.9rem',
+          letterSpacing: 'var(--letter-spacing-sm)',
+        }}
+        {...animation}
+        to={`/posts`}
+      >
+        close
+      </Button>
+    </>
+  );
+
   const formattedDate: string = dayjs(post.date).format('DD.MM.YYYY HH:mm:ss');
 
   return (
@@ -45,6 +73,7 @@ const Card: React.FC<ICardProps> = ({ post }) => {
           sx={{
             display: 'flex',
             flexDirection: 'row',
+            justifyContent: 'space-between',
           }}
         >
           <Typography
@@ -58,6 +87,18 @@ const Card: React.FC<ICardProps> = ({ post }) => {
           >
             Created At - {formattedDate}
           </Typography>
+          <IconButton
+            component={NavLink}
+            to={`/posts/${post.id}/edit`}
+            sx={{
+              width: '50px',
+              height: '50px',
+              backgroundColor: 'var(--color-bg-card-white)',
+              borderRadius: 0,
+            }}
+          >
+            <DrawRoundedIcon />
+          </IconButton>
         </Box>
         <Typography
           component={'p'}
@@ -71,31 +112,9 @@ const Card: React.FC<ICardProps> = ({ post }) => {
           {post.title}
         </Typography>
 
-        {location.pathname === `/posts/${post.id}` ? (
-          <>
-            <Typography
-              component={'p'}
-              sx={{
-                letterSpacing: 'var(--letter-spacing-sm)',
-                backgroundColor: 'var(--color-bg-text-white)',
-                padding: 2,
-              }}
-            >
-              {post.description}
-            </Typography>
-            <Button
-              component={MotionNavLink}
-              sx={{
-                borderRadius: 0,
-                fontSize: '0.9rem',
-                letterSpacing: 'var(--letter-spacing-sm)',
-              }}
-              {...animation}
-              to={`/posts`}
-            >
-              close
-            </Button>
-          </>
+        {location.pathname === `/posts/${post.id}` ||
+        location.pathname === `/posts/${post.id}/edit` ? (
+          <>{closeButton}</>
         ) : (
           <>
             <Button
@@ -112,6 +131,8 @@ const Card: React.FC<ICardProps> = ({ post }) => {
             </Button>
           </>
         )}
+
+        <Outlet />
       </Box>
     </>
   );

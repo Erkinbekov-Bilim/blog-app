@@ -6,6 +6,7 @@ import Contacts from './containers/Contacts/Contacts';
 import { Box, Card } from '@mui/material';
 import NotFound from './containers/NotFound/NotFound';
 import Layout from './Layout/Layout';
+import EditBlog from './containers/EditBlog/EditBlog';
 
 const App = () => {
   return (
@@ -29,7 +30,7 @@ const App = () => {
           }
         />
         <Route
-          path="/posts"
+          path="/posts/"
           element={
             <Layout>
               <Home />
@@ -37,6 +38,7 @@ const App = () => {
           }
         >
           <Route path=":id" element={<Card />} />
+          <Route path=":idBlog/edit" element={<EditBlog />} />
         </Route>
         <Route
           path="/new-post"
