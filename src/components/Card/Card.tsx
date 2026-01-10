@@ -132,7 +132,7 @@ const Card: React.FC<ICardProps> = ({ post }) => {
           </>
         )}
 
-        <Outlet />
+        {location.pathname === `/posts/${post.id}/edit` && <Outlet />}
       </Box>
     </>
   );
