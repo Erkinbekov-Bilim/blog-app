@@ -6,12 +6,13 @@ import { Box, Typography } from '@mui/material';
 import Card from '../../components/Card/Card';
 import Loading from '../../UI/Loading/Loading';
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
+import './Home.css';
 
 const Home = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [blog, setBlog] = useState<IBlog[]>([]);
 
-  const getBlog = useCallback(async () => {
+  const getBlog = useCallback(async (): Promise<void> => {
     try {
       setLoading(true);
 
@@ -71,10 +72,14 @@ const Home = () => {
     ) : (
       <>
         <Box
+          className="cards"
           sx={{
             display: 'flex',
             flexDirection: 'column',
             gap: 5,
+            maxHeight: 'calc(var(--app-height) - 200px)',
+            overflowY: 'auto',
+            paddingRight: 2,
           }}
         >
           {blog.length > 0 &&
