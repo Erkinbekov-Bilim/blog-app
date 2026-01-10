@@ -2,4 +2,5 @@
   background: var(--color-bg-tag-main);
   padding: 30px 20px;
   height: var(--app-height);
+  overflow: hidden;
 }
